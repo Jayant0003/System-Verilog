@@ -18,6 +18,7 @@ en_state state;
     d2=new;
    // d1=b;// it is illegal
     b=d1;
+// it is legal to assign a base class handle to a derived class handle if base class handle refers to an object of derived class
     $cast(d2,b);// d2=b is valid but will give error because of incompaitable types. Dynamic casting will allow to see the conent as b has dervied class content.
     state=Write_pkt;
     state=en_state'(3);
