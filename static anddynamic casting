@@ -1,0 +1,45 @@
+// Static and Dynamic Casting
+class base;
+  int a=6;
+endclass
+class derived extends base;
+  int b=9;
+endclass
+
+module test;
+  base b;
+  derived d1,d2;
+typedef  enum {Read_pkg,Write_pkt,Error_pkt,Reset_pkg} en_state;
+en_state state;
+  int arr[][];
+  initial begin
+    b=new;
+    d1=new;
+    d2=new;
+   // d1=b;// it is illegal
+    b=d1;
+    $cast(d2,b);// d2=b is valid but will give error because of incompaitable types. Dynamic casting will allow to see the conent as b has dervied class content.
+    state=Write_pkt;
+    state=en_state'(3);
+//    $cast(state,6);// dynamic casting will also see out of bound values and display run_time errors...otherwise only waring will come
+    state=6;
+    //arr.size=6;
+    //foreach(arr[i][j]) arr[i].size=i;
+//     arr=new[2];
+//     arr[0]=new[2];
+//     arr[1]=new[3];
+    arr=new[3];
+    foreach(arr[j]) begin arr[j]=new[arr.size
+                           ]; end
+    foreach(arr[i,j]) begin
+      arr[i][j]=$urandom_range(4,18);
+   //   $display(i,j);
+      end
+    $display("arr=%p",arr);
+    
+
+  end
+  
+  
+  
+  endmodule
